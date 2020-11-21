@@ -11,7 +11,7 @@ export async function getStaticProps({ params }) {
       post(where: { slug: $slug }) {
         title
         cover
-        text body
+        textBody
       }
     }
   `,
