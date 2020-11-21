@@ -3,15 +3,15 @@ import { GraphQLClient } from 'graphql-request';
 
 export async function getStaticProps() {
   const graphcms = new GraphQLClient(
-    'https://api-eu-central-1.graphcms.com/v2/ck8sn5tnf01gc01z89dbc7s0o/master'
+    'https://api-eu-central-1.graphcms.com/v2/ckhrfor0uooss01yx5vm64ruk/master'
   );
 
-  const { products } = await graphcms.request(
+  const { posts } = await graphcms.request(
     `
       { 
-        products {
+        posts {
           slug
-          name
+          title
         }
       }
     `
@@ -19,14 +19,14 @@ export async function getStaticProps() {
 
   return {
     props: {
-      products,
+      posts,
     },
   };
 }
 
-export default ({ products }) =>
-  products.map(({ slug, name }) => (
-    <Link key={slug} href={`/products/${slug}`}>
-      <a>{name}</a>
+export default ({ posts }) =>
+  posts.map(({ slug, title }) => (
+    <Link key={slug} href={`/posts/${slug}`}>
+      <a>{title}</a>
     </Link>
   ));
