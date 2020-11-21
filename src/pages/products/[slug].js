@@ -10,8 +10,6 @@ export async function getStaticProps({ params }) {
     query PostQuery($slug: String!) {
       post(where: { slug: $slug }) {
         title
-        cover
-        textBody
       }
     }
   `,
@@ -48,7 +46,5 @@ export async function getStaticPaths() {
 export default ({ product }) => (
   <React.Fragment>
     <h1>{post.name}</h1>
-    <p>{post.cover}</p>
-    <p>{post.textBody / 100}</p>
   </React.Fragment>
 );
