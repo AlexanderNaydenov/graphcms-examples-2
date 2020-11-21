@@ -1,17 +1,17 @@
 import { GraphQLClient } from 'graphql-request';
 
 const graphcms = new GraphQLClient(
-  'https://api-eu-central-1.graphcms.com/v2/ck8sn5tnf01gc01z89dbc7s0o/master'
+  'https://api-eu-central-1.graphcms.com/v2/ckhrfor0uooss01yx5vm64ruk/master'
 );
 
 export async function getStaticProps({ params }) {
-  const { product } = await graphcms.request(
+  const { post } = await graphcms.request(
     `
-    query ProductPageQuery($slug: String!) {
-      product(where: { slug: $slug }) {
-        name
-        description
-        price
+    query PostQuery($slug: String!) {
+      post(where: { slug: $slug }) {
+        title
+        cover
+        text body
       }
     }
   `,
@@ -22,23 +22,23 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      product,
+      post,
     },
   };
 }
 
 export async function getStaticPaths() {
-  const { products } = await graphcms.request(`
+  const { posts } = await graphcms.request(`
     {
-      products {
+      posts {
         slug
-        name
+        title
       }
     }
   `);
 
   return {
-    paths: products.map(({ slug }) => ({
+    paths: posts.map(({ slug }) => ({
       params: { slug },
     })),
     fallback: false,
@@ -47,8 +47,8 @@ export async function getStaticPaths() {
 
 export default ({ product }) => (
   <React.Fragment>
-    <h1>{product.name}</h1>
-    <p>{product.description}</p>
-    <p>{product.price / 100}</p>
+    <h1>{post.name}</h1>
+    <p>{post.cover}</p>
+    <p>{post.textBody / 100}</p>
   </React.Fragment>
 );
