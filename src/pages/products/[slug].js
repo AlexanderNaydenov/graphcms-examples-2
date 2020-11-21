@@ -43,8 +43,8 @@ export async function getStaticPaths() {
   };
 }
 
-export default ({ product }) => (
+export default ({ post }) => (
   <React.Fragment>
-    <h1>{post.name}</h1>
+    <h1>{post.title}</h1>
   </React.Fragment>
 );
